@@ -3,14 +3,14 @@ import { registerUser, loginUser } from '../services/auth.service';
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
       res.status(400).json({ message: 'Name, email and password are required' });
       return;
     }
 
-    const result = await registerUser(name, email, password, role);
+    const result = await registerUser(name, email, password);
     res.status(201).json({ message: 'User registered successfully', ...result });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
